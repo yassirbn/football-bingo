@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/football-bingo/static/css/main.86c75ec9.css",
+    "main.js": "/football-bingo/static/js/main.7347973e.js",
+    "static/js/453.172e9ae7.chunk.js": "/football-bingo/static/js/453.172e9ae7.chunk.js",
+    "index.html": "/football-bingo/index.html",
+    "main.86c75ec9.css.map": "/football-bingo/static/css/main.86c75ec9.css.map",
+    "main.7347973e.js.map": "/football-bingo/static/js/main.7347973e.js.map",
+    "453.172e9ae7.chunk.js.map": "/football-bingo/static/js/453.172e9ae7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.86c75ec9.css",
+    "static/js/main.7347973e.js"
+  ]
+}
