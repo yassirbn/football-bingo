@@ -3,9 +3,6 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      fontFamily: {
-        handwritten: ["'Caveat'", "cursive"],
-      },
       animation: {
         fireworks: "fireworks 1.5s ease-out forwards",
         "bingo-fade": "bingo-fade 2s ease-out forwards",

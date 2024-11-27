@@ -6,8 +6,14 @@
 
 }
 
-
-.selected .font-handwritten{
-    color: white;
-    font-weight: bolder;
+.tada-right {
+    position: absolute;
+    bottom: 5%;
+    right: 0;
+}
+.tada-left {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    transform: scale(-1, 1);
 }
