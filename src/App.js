@@ -33,7 +33,7 @@ const App = () => {
   
 
   return (
-    <div className="min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center">
       <BingoGrid words={words} />
     </div>
   );
