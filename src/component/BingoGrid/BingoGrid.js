@@ -142,9 +142,9 @@ const BingoGrid = ({ words }) => {
                 selectedCells[index] ? "selected" : "bg-transparent"
               } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
               style={{
-                width: "50px", // Adjusted for mobile/tablet responsiveness
-                height: "50px", // Adjusted for mobile/tablet responsiveness
-                minWidth: "50px", // Ensures the circle doesn't shrink smaller than this
+                width: "70px", // Adjusted for mobile/tablet responsiveness
+                height: "70px", // Adjusted for mobile/tablet responsiveness
+                minWidth: "70px", // Ensures the circle doesn't shrink smaller than this
               }}
             >
               <span
