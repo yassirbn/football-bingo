@@ -103,7 +103,7 @@ const BingoGrid = ({ words }) => {
           <div
             key={index}
             className={`flex items-center justify-center border-b border-l border-t border-r border-gray-700 text-center font-medium aspect-square
-              ${selectedCells[index] ? "selected text-white" : "bg-gray-100 hover:bg-blue-200 cursor-pointer"}
+              ${selectedCells[index] ? "selected text-white" : "bg-[#efffe6e8] hover:bg-blue-200 cursor-pointer"}
               ${word === "FREE SPACE" ? "cursor-default" : ""}`}
             onClick={() => handleCellClick(index)}
           >
