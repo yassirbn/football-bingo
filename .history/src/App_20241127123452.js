@@ -17,6 +17,7 @@ const App = () => {
     "Tackle!",
     "Cross!",
     "Counterattack!",
+    "He’s injured!",
     "Come on, ref!",
     "In the box!",
     "No way!!",
@@ -33,7 +34,7 @@ const App = () => {
   
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <BingoGrid words={words} />
     </div>
   );

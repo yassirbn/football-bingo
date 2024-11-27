@@ -1,0 +1,27 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: #4CAF50; /* Grass green base */
+  background-image:
+    /* Center line */
+    linear-gradient(90deg, white 2px, transparent 2px),
+    /* Horizontal lines */
+    linear-gradient(to bottom, white 2px, transparent 48px),
+    /* Goal boxes */
+    linear-gradient(90deg, transparent calc(20% - 2px), white 2px, transparent calc(80% + 2px), white 2px, transparent 20%),
+    /* Center circle */
+    radial-gradient(circle, transparent 45%, white 45%, white 46%, transparent 46%);
+  background-size: 100% 50px, 100% 50px, 100% 100%, 100% 100%;
+  background-repeat: no-repeat, repeat-y, no-repeat, no-repeat;
+  background-position: center center, 0 0, 0 0, center center;
+}
+

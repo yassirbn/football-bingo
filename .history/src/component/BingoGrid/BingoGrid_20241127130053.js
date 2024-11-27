@@ -10,12 +10,12 @@ const BingoGrid = ({ words }) => {
 
     // Fill with placeholders if not enough words
     while (shuffledWords.length < totalCells) {
-      shuffledWords.push("placeholder");
+      shuffledWords.push("PLACEHOLDER");
     }
 
     // Replace the center cell with "FREE SPACE"
     const centerIndex = Math.floor(totalCells / 2);
-    shuffledWords[centerIndex] = "free slot 🎉";
+    shuffledWords[centerIndex] = "FREE SPACE";
 
     return shuffledWords;
   };
@@ -28,7 +28,7 @@ const BingoGrid = ({ words }) => {
 
   // Handle cell click
   const handleCellClick = (index) => {
-    if (gridWords[index] === "free slot 🎉" || selectedCells[index]) return; // Ignore clicks on FREE SPACE or already selected cells
+    if (gridWords[index] === "FREE SPACE" || selectedCells[index]) return; // Ignore clicks on FREE SPACE or already selected cells
 
     const updatedSelection = [...selectedCells];
     updatedSelection[index] = true;
@@ -60,7 +60,7 @@ const BingoGrid = ({ words }) => {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden contents">
+    <div className="p-4 relative h-screen overflow-hidden">
       {/* Fireworks Animation */}
       {bingo && (
         <div className="absolute inset-0 z-20 flex justify-center items-center pointer-events-none">
@@ -94,7 +94,7 @@ const BingoGrid = ({ words }) => {
 
       {/* Bingo Grid */}
       <div
-        className="grid pt-5"
+        className="grid"
         style={{
           gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
         }}
@@ -102,7 +102,7 @@ const BingoGrid = ({ words }) => {
         {gridWords.map((word, index) => (
           <div
             key={index}
-            className={`flex items-center justify-center border-b border-l border-t border-r border-gray-700 text-center font-medium aspect-square
+            className={`flex items-center justify-center border-b border-r border-gray-700 text-center font-medium aspect-square
               ${selectedCells[index] ? "bg-blue-300 text-white" : "bg-gray-100 hover:bg-blue-200 cursor-pointer"}
               ${word === "FREE SPACE" ? "cursor-default" : ""}`}
             onClick={() => handleCellClick(index)}
@@ -110,7 +110,7 @@ const BingoGrid = ({ words }) => {
             <div
               className={`${
                 selectedCells[index] ? "bg-blue-300 text-white" : "bg-transparent"
-              } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
+              } flex items-center justify-center py-3 px-6 sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16`}
               style={{
                 width: "50px", // Adjusted for mobile/tablet responsiveness
                 height: "50px", // Adjusted for mobile/tablet responsiveness

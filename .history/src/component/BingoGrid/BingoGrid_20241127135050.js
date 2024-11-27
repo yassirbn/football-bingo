@@ -110,7 +110,7 @@ const BingoGrid = ({ words }) => {
             <div
               className={`${
                 selectedCells[index] ? "bg-blue-300 text-white" : "bg-transparent"
-              } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
+              } flex items-center justify-center py-3 md:px-6 sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal`}
               style={{
                 width: "50px", // Adjusted for mobile/tablet responsiveness
                 height: "50px", // Adjusted for mobile/tablet responsiveness

@@ -60,7 +60,7 @@ const BingoGrid = ({ words }) => {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden contents">
+    <div className="relative h-screen overflow-hidden">
       {/* Fireworks Animation */}
       {bingo && (
         <div className="absolute inset-0 z-20 flex justify-center items-center pointer-events-none">
@@ -110,7 +110,7 @@ const BingoGrid = ({ words }) => {
             <div
               className={`${
                 selectedCells[index] ? "bg-blue-300 text-white" : "bg-transparent"
-              } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
+              } flex items-center justify-center py-3 md:px-6 sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all`}
               style={{
                 width: "50px", // Adjusted for mobile/tablet responsiveness
                 height: "50px", // Adjusted for mobile/tablet responsiveness

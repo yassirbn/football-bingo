@@ -6,11 +6,7 @@
 @tailwind utilities;
 
 
-
 body {
-  background-image: url('./assets/images/background.jpg');
-  background-size: cover;
-  background-position: center;
-  }
-  
+background-image: url('./assets/images/background.jpg');
+}
 
