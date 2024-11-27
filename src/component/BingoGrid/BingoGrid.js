@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './BingoGrid.css'
 const BingoGrid = ({ words }) => {
   const gridSize = 5; // 5x5 grid
   const totalCells = gridSize * gridSize;
@@ -63,7 +63,7 @@ const BingoGrid = ({ words }) => {
     <div className="relative h-screen overflow-hidden contents">
       {/* Fireworks Animation */}
       {bingo && (
-        <div className="absolute inset-0 z-20 flex justify-center items-center pointer-events-none">
+        <div className="absolute inset-0 z-20 flex justify-center items-center pointer-events-none overflow-hidden">
           {/* Firework Particles */}
           {Array.from({ length: 300 }).map((_, idx) => (
             <div
@@ -103,13 +103,13 @@ const BingoGrid = ({ words }) => {
           <div
             key={index}
             className={`flex items-center justify-center border-b border-l border-t border-r border-gray-700 text-center font-medium aspect-square
-              ${selectedCells[index] ? "bg-blue-300 text-white" : "bg-gray-100 hover:bg-blue-200 cursor-pointer"}
+              ${selectedCells[index] ? "selected text-white" : "bg-gray-100 hover:bg-blue-200 cursor-pointer"}
               ${word === "FREE SPACE" ? "cursor-default" : ""}`}
             onClick={() => handleCellClick(index)}
           >
             <div
               className={`${
-                selectedCells[index] ? "bg-blue-300 text-white" : "bg-transparent"
+                selectedCells[index] ? "selected text-white" : "bg-transparent"
               } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
               style={{
                 width: "50px", // Adjusted for mobile/tablet responsiveness

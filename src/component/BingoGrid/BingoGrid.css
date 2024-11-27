@@ -1,0 +1,13 @@
+.selected{
+    background-image: url('./../../assets/images/ball.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+
+.selected .font-handwritten{
+    color: white;
+    font-weight: bolder;
+}
