@@ -1,53 +1,47 @@
 import React, { useState } from "react";
 import "./BingoGrid.css";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+
 const BingoGrid = ({ words }) => {
   const gridSize = 5; // 5x5 grid
   const totalCells = gridSize * gridSize;
 
-  // Shuffle words only once and store in state
   const initializeGrid = () => {
     const shuffledWords = [...words]
       .sort(() => 0.5 - Math.random())
       .slice(0, totalCells);
 
-    // Fill with placeholders if not enough words
     while (shuffledWords.length < totalCells) {
       shuffledWords.push("placeholder");
     }
 
-    // Replace the center cell with "FREE SPACE"
     const centerIndex = Math.floor(totalCells / 2);
     shuffledWords[centerIndex] = "free slot 🎉";
 
     return shuffledWords;
   };
 
-  const [gridWords] = useState(initializeGrid);
+  const [gridWords, setGridWords] = useState(initializeGrid);
   const [selectedCells, setSelectedCells] = useState(
     Array(totalCells)
       .fill(false)
-      .map((_, i) => i === Math.floor(totalCells / 2)) // Center (FREE SPACE) is pre-selected
+      .map((_, i) => i === Math.floor(totalCells / 2))
   );
   const [bingo, setBingo] = useState(false);
 
-  // Handle cell click
   const handleCellClick = (index) => {
-    if (gridWords[index] === "free slot 🎉" || selectedCells[index]) return; // Ignore clicks on FREE SPACE or already selected cells
+    if (gridWords[index] === "free slot 🎉" || selectedCells[index]) return;
 
     const updatedSelection = [...selectedCells];
     updatedSelection[index] = true;
     setSelectedCells(updatedSelection);
 
-    // Check for Bingo
     checkForBingo(updatedSelection);
   };
 
-  // Check for Bingo
   const checkForBingo = (selected) => {
     const checkLine = (line) => line.every((index) => selected[index]);
 
-    // Generate all rows, columns, and diagonals
     const rows = Array.from({ length: gridSize }, (_, i) =>
       Array.from({ length: gridSize }, (_, j) => i * gridSize + j)
     );
@@ -66,29 +60,37 @@ const BingoGrid = ({ words }) => {
     const lines = [...rows, ...cols, diagonal1, diagonal2];
 
     if (lines.some(checkLine)) {
-      setBingo(true); // Set Bingo to true to trigger animations
+      setBingo(true);
     }
+  };
+
+  const resetGame = () => {
+    setGridWords(initializeGrid());
+    setSelectedCells(
+      Array(totalCells)
+        .fill(false)
+        .map((_, i) => i === Math.floor(totalCells / 2))
+    );
+    setBingo(false);
   };
 
   return (
     <div className="relative h-screen overflow-hidden contents">
-      {/* Fireworks Animation */}
       {bingo && (
         <>
           <div className="absolute inset-0 z-20 flex justify-center items-center pointer-events-none overflow-hidden">
-            {/* Firework Particles */}
             {Array.from({ length: 300 }).map((_, idx) => (
               <div
                 key={idx}
                 className="fireworks-particle w-4 h-4 rounded-full absolute animate-fireworks"
                 style={{
-                  "--x": `${Math.random() * 120 - 60}vw`, // Expanded X direction
-                  "--y": `${Math.random() * 120 - 60}vh`, // Expanded Y direction
-                  "--size": `${Math.random() * 10 + 5}px`, // Random size (larger particles)
-                  "--duration": `${Math.random() * 2 + 1.5}s`, // Increased duration for longer explosion
-                  "--delay": `${Math.random() * 0.5}s`, // Random delay
-                  backgroundColor: `hsl(${Math.random() * 360}, 100%, 50%)`, // Random color (HSL)
-                  transform: `rotate(${Math.random() * 360}deg)`, // Random rotation for more chaos
+                  "--x": `${Math.random() * 120 - 60}vw`,
+                  "--y": `${Math.random() * 120 - 60}vh`,
+                  "--size": `${Math.random() * 10 + 5}px`,
+                  "--duration": `${Math.random() * 2 + 1.5}s`,
+                  "--delay": `${Math.random() * 0.5}s`,
+                  backgroundColor: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                  transform: `rotate(${Math.random() * 360}deg)`,
                 }}
               ></div>
             ))}
@@ -100,7 +102,7 @@ const BingoGrid = ({ words }) => {
             autoplay
             className="tada-right"
           />
-           <DotLottieReact
+          <DotLottieReact
             src="https://lottie.host/732933df-87a0-491e-a390-ede63ec734e4/cPvVkDCZ6t.lottie"
             loop
             autoplay
@@ -109,7 +111,6 @@ const BingoGrid = ({ words }) => {
         </>
       )}
 
-      {/* Bingo Text Animation */}
       {bingo && (
         <div className="absolute inset-0 flex items-center justify-center z-10 animate-bingo-fade">
           <h2 className="text-7xl sm:text-8xl md:text-9xl lg:text-10xl font-extrabold text-red-600 animate-bingo-shake">
@@ -118,7 +119,17 @@ const BingoGrid = ({ words }) => {
         </div>
       )}
 
-      {/* Bingo Grid */}
+      {bingo && (
+        <div className="absolute inset-x-0 bottom-20 flex justify-center z-30">
+          <button
+            onClick={resetGame}
+            className="px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700"
+          >
+            Play Again
+          </button>
+        </div>
+      )}
+
       <div
         className="grid pt-5"
         style={{
@@ -142,9 +153,9 @@ const BingoGrid = ({ words }) => {
                 selectedCells[index] ? "selected" : "bg-transparent"
               } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
               style={{
-                width: "70px", // Adjusted for mobile/tablet responsiveness
-                height: "70px", // Adjusted for mobile/tablet responsiveness
-                minWidth: "70px", // Ensures the circle doesn't shrink smaller than this
+                width: "70px",
+                height: "70px",
+                minWidth: "70px",
               }}
             >
               <span
