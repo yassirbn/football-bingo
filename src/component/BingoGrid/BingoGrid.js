@@ -6,8 +6,8 @@ const BingoGrid = ({ words }) => {
   const gridSize = 5; // 5x5 grid
   const totalCells = gridSize * gridSize;
 
-  const initializeGrid = () => {
-    const shuffledWords = [...words]
+  const initializeGrid = (wordList) => {
+    const shuffledWords = [...wordList]
       .sort(() => 0.5 - Math.random())
       .slice(0, totalCells);
 
@@ -21,13 +21,15 @@ const BingoGrid = ({ words }) => {
     return shuffledWords;
   };
 
-  const [gridWords, setGridWords] = useState(initializeGrid);
+  const [gridWords, setGridWords] = useState(initializeGrid(words));
   const [selectedCells, setSelectedCells] = useState(
     Array(totalCells)
       .fill(false)
       .map((_, i) => i === Math.floor(totalCells / 2))
   );
   const [bingo, setBingo] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [newWords, setNewWords] = useState(Array(25).fill(""));
 
   const handleCellClick = (index) => {
     if (gridWords[index] === "free slot 🎉" || selectedCells[index]) return;
@@ -65,14 +67,39 @@ const BingoGrid = ({ words }) => {
   };
 
   const resetGame = () => {
-    setGridWords(initializeGrid());
+    setShowModal(true);
+  };
+
+  const handleNewGame = () => {
+    const validWords = newWords.filter((word) => word.trim().length > 0);
+    if (validWords.length < 25) {
+      alert("Please fill in all 25 words.");
+      return;
+    }
+
+    setGridWords(initializeGrid(validWords));
     setSelectedCells(
       Array(totalCells)
         .fill(false)
         .map((_, i) => i === Math.floor(totalCells / 2))
     );
     setBingo(false);
+    setShowModal(false);
+    setNewWords(Array(25).fill(""));
   };
+
+  const handlePlayWithRandom = () => {
+    setGridWords(initializeGrid(words));
+    setSelectedCells(
+      Array(totalCells)
+        .fill(false)
+        .map((_, i) => i === Math.floor(totalCells / 2))
+    );
+    setBingo(false);
+    setShowModal(false);
+  };
+
+  const allWordsEntered = newWords.every((word) => word.trim().length > 0);
 
   return (
     <div className="relative h-screen overflow-hidden contents">
@@ -119,15 +146,23 @@ const BingoGrid = ({ words }) => {
         </div>
       )}
 
-      {bingo && (
-        <div className="absolute inset-x-0 bottom-20 flex justify-center z-30">
+      {bingo && ( <>
+        <div className="absolute inset-x-0 bottom-[11.5rem] flex justify-center z-30 space-x-4 font-extrabold text-2xl">Play again ?</div>
+        <div className="absolute inset-x-0 bottom-20 flex justify-center z-30 space-x-4">
+           
           <button
             onClick={resetGame}
             className="px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700"
           >
-            Play Again
+          with custom words
           </button>
-        </div>
+          <button
+            onClick={handlePlayWithRandom}
+            className="px-8 py-4 bg-green-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-green-700"
+          >
+           with random words
+          </button>
+        </div></>
       )}
 
       <div
@@ -151,15 +186,10 @@ const BingoGrid = ({ words }) => {
             <div
               className={`${
                 selectedCells[index] ? "selected" : "bg-transparent"
-              } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 md:px-12 lg:py-8 lg:px-16 break-all md:break-normal `}
-              style={{
-                width: "70px",
-                height: "70px",
-                minWidth: "70px",
-              }}
+              } flex items-center justify-center py-3  sm:py-4 sm:px-8 md:py-6 lg:py-8 md:break-normal overflow-hidden grid-width md:desktop-width`}  
             >
               <span
-                className={`text-xs sm:text-sm md:text-base lg:text-lg font-bold text-black gird-word ${
+                className={`text-xs sm:text-sm md:text-base lg:text-lg font-bold text-black gird-word w-full break-words ${
                   selectedCells[index] ? "text-white" : "text-black"
                 }`}
               >
@@ -169,6 +199,49 @@ const BingoGrid = ({ words }) => {
           </div>
         ))}
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 bg-gray-800 bg-opacity-75 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-4 max-w-md w-full max-h-screen overflow-y-auto">
+            <h3 className="text-2xl font-bold mb-4">Enter 25 New Words</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {newWords.map((word, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  value={word}
+                  onChange={(e) =>
+                    setNewWords(
+                      newWords.map((w, i) => (i === index ? e.target.value : w))
+                    )
+                  }
+                  className="border rounded-lg p-2 w-full"
+                  placeholder={`Word ${index + 1}`}
+                />
+              ))}
+            </div>
+            <div className="mt-6 flex justify-end space-x-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleNewGame}
+                disabled={!allWordsEntered}
+                className={`px-4 py-2 rounded-lg ${
+                  allWordsEntered
+                    ? "bg-blue-600 text-white"
+                    : "bg-blue-300 text-gray-200"
+                }`}
+              >
+                Start Game
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -17,3 +17,19 @@
     left: 0;
     transform: scale(-1, 1);
 }
+.grid-width{
+    width:  70px;
+    height: 70px;
+    min-width: 70px;
+  }
+
+
+
+  
+  @screen md {
+    .grid-width{
+        width: 120px;
+        height: 120px;
+        min-width: 120px;
+      }
+  }
