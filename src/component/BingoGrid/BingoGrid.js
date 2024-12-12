@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import "./BingoGrid.css";
-import {
-  initializeGrid,
-  initializeSelected,
-} from "../../services/GridServices";
+import { initializeSelected } from "../../services/GridServices";
 import BingoAnimation from "../BingoAnimation/BingoAnimation";
-const gridSize = 5; // 5x5 grid
+
+
+const gridSize = 5;
 const totalCells = gridSize * gridSize;
 
+const initializeGrid = (wordList) => {
+  const centerIndex = Math.floor(totalCells / 2);
+  const shuffledWords = [...wordList]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, totalCells);
+
+  while (shuffledWords.length < totalCells) {
+    shuffledWords.push("placeholder");
+  }
+
+  shuffledWords[centerIndex] = "FREE SLOT";
+
+  return shuffledWords;
+};
+
 const BingoGrid = ({ words }) => {
-  const [gridWords, setGridWords] = useState(initializeGrid(words, totalCells));
+  const [gridWords, setGridWords] = useState(initializeGrid(words));
   const [selectedCells, setSelectedCells] = useState(
     initializeSelected(totalCells)
   );
