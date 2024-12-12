@@ -28,6 +28,7 @@ const BingoGrid = ({ words }) => {
     initializeSelected(totalCells)
   );
   const [bingo, setBingo] = useState(false);
+  const [canContinue, setCanContinue] = useState(true);
   const [completedLines, setCompletedLines] = useState([]);
 
   const handleCellClick = (index) => {
@@ -64,6 +65,7 @@ const BingoGrid = ({ words }) => {
       );
       if (checkLine(line) && !lineAlreadyCompleted) {
         setCompletedLines([...completedLines, line]);
+        setCanContinue(!selected.every(Boolean))
         setBingo(true);
       }
     });
@@ -86,6 +88,7 @@ const BingoGrid = ({ words }) => {
         <BingoAnimation
           handleContinue={handleContinue}
           handlePlayAgain={handlePlayAgain}
+          canContinue={canContinue}
         />
       )}
 

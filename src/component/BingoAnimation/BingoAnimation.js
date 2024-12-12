@@ -1,7 +1,7 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import React from "react";
 import "./BingoAnimation.css";
-export default function BingoAnimation({ handleContinue, handlePlayAgain }) {
+export default function BingoAnimation({ handleContinue, handlePlayAgain , canContinue}) {
   return (
     <>
       <div className="absolute inset-0 z-20 flex justify-center items-center pointer-events-none overflow-hidden">
@@ -41,12 +41,12 @@ export default function BingoAnimation({ handleContinue, handlePlayAgain }) {
         </h2>
       </div>
       <div className="absolute inset-x-0 bottom-20 flex justify-center z-30 space-x-4">
-        <button
+        {canContinue &&(<button
           onClick={handleContinue}
           className="px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700"
         >
           Continue
-        </button>
+        </button>)}
         <button
           onClick={handlePlayAgain}
           className="px-8 py-4 bg-green-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-green-700"
