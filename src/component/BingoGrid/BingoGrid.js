@@ -58,13 +58,6 @@ const BingoGrid = ({ words }) => {
     );
     const lines = [...rows, ...cols, diagonal1, diagonal2];
     lines.forEach((line) => {
-      console.log(
-        line,
-        completedLines.some(
-          (completedLine) =>
-            JSON.stringify(completedLine) === JSON.stringify(line)
-        )
-      );
       const lineAlreadyCompleted = completedLines.some(
         (completedLine) =>
           JSON.stringify(completedLine) === JSON.stringify(line)
