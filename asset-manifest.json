@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/football-bingo/static/css/main.92a9cf9f.css",
-    "main.js": "/football-bingo/static/js/main.05ecf5ae.js",
+    "main.js": "/football-bingo/static/js/main.1c287a3c.js",
     "static/js/453.172e9ae7.chunk.js": "/football-bingo/static/js/453.172e9ae7.chunk.js",
     "static/media/background.jpg": "/football-bingo/static/media/background.7a4b2dcc909a606502ba.jpg",
     "static/media/ball.jpeg": "/football-bingo/static/media/ball.021b9de4ba9216e18fe8.jpeg",
     "index.html": "/football-bingo/index.html",
     "main.92a9cf9f.css.map": "/football-bingo/static/css/main.92a9cf9f.css.map",
-    "main.05ecf5ae.js.map": "/football-bingo/static/js/main.05ecf5ae.js.map",
+    "main.1c287a3c.js.map": "/football-bingo/static/js/main.1c287a3c.js.map",
     "453.172e9ae7.chunk.js.map": "/football-bingo/static/js/453.172e9ae7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.92a9cf9f.css",
-    "static/js/main.05ecf5ae.js"
+    "static/js/main.1c287a3c.js"
   ]
 }
